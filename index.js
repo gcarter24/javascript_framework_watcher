@@ -1,9 +1,16 @@
 /* global Chart, axios */
 axios
-  .get("https://api.github.com")
+  .get("https://api.github.com/repos/emberjs/ember.js")
   .then(function (response) {
     // handle success
-    console.log(response);
+    console.log(
+      response.data.full_name,
+      response.data.subscribers_count,
+      response.data.watchers,
+      response.data.forks,
+      response.data
+    );
+    this.full_name = response.data.full_name;
   })
   .catch(function (error) {
     // handle error
@@ -20,7 +27,11 @@ var myChart = new Chart(ctx, {
     datasets: [
       {
         label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        data: function () {
+          return {
+            repo: {},
+          };
+        },
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
