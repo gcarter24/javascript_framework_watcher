@@ -3,14 +3,8 @@ axios
   .get("https://api.github.com/repos/emberjs/ember.js")
   .then(function (response) {
     // handle success
-    console.log(
-      response.data.full_name,
-      response.data.subscribers_count,
-      response.data.watchers,
-      response.data.forks,
-      response.data
-    );
-    this.full_name = response.data.full_name;
+    console.log(response.data.subscribers_count, response.data.watchers, response.data.forks, response.data);
+    this.forks = response.data.forks;
   })
   .catch(function (error) {
     // handle error
