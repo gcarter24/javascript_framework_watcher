@@ -5,6 +5,32 @@ axios
     // handle success
     console.log(response.data.subscribers_count, response.data.watchers, response.data.forks, response.data);
     this.forks = response.data.forks;
+    this.watchers = response.data.watchers;
+    this.stars = response.data.subscribers_count;
+    console.log(this.stars);
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Stars", "Watchers", "Forks"],
+        datasets: [
+          {
+            label: "EmberJS",
+            data: [this.stars, this.watchers, this.forks],
+            backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)"],
+            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   })
   .catch(function (error) {
     // handle error
@@ -13,44 +39,44 @@ axios
   .then(function () {
     // always executed
   });
-var ctx = document.getElementById("myChart").getContext("2d");
-var myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: function () {
-          return {
-            repo: {},
-          };
+
+axios
+  .get("https://api.github.com/repos/emberjs/ember.js")
+  .then(function (response) {
+    // handle success
+    console.log(response.data.subscribers_count, response.data.watchers, response.data.forks, response.data);
+    this.forks = response.data.forks;
+    this.watchers = response.data.watchers;
+    this.stars = response.data.subscribers_count;
+    console.log(this.stars);
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Stars", "Watchers", "Forks"],
+        datasets: [
+          {
+            label: "Angular",
+            data: [this.stars, this.watchers, this.forks],
+            backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)"],
+            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
         },
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
       },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
+    });
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
