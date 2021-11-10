@@ -23,10 +23,15 @@ axios
       // handle success
 
       responseOne = responses[0].data;
+      // Ember
       responseTwo = responses[1].data;
+      // Angular
       responesThree = responses[2].data;
+      // Vue.js
       responesFour = responses[3].data;
+      // React
       responesFive = responses[4].data;
+      // Svelte
 
       var ctx = document.getElementById("myChart").getContext("2d");
       var myChart = new Chart(ctx, {
